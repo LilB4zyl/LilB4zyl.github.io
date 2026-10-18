@@ -3,405 +3,156 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Artistic portfolio — visual works across monochrome, red, green, and experimental collections.">
+  <meta name="description" content="LilB4zyl — 3D Artist Portfolio. Visual works across monochrome, red, green, and experimental collections.">
   <title>LilB4zyl — Portfolio</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="page-menu">
 
-  <!-- Loader Overlay -->
+  <!-- ═══════════ LOADER ═══════════ -->
   <div class="loader" id="loader">
-    <div class="loader-text">PORTFOLIO</div>
-    <div class="loader-bar"><div class="loader-fill"></div></div>
+    <div class="loader-inner">
+      <div class="loader-reticle">
+        <span class="corner c-tl"></span>
+        <span class="corner c-tr"></span>
+        <span class="corner c-bl"></span>
+        <span class="corner c-br"></span>
+        <span class="loader-label">SCANNING</span>
+      </div>
+      <div class="loader-bar"><div class="loader-fill"></div></div>
+      <span class="loader-pct" id="loader-pct">0%</span>
+    </div>
   </div>
 
-  <!-- Navigation -->
-  <header class="nav" id="nav">
-    <a href="#hero" class="nav-brand">LilB4zyl</a>
-    <nav class="nav-links">
-      <a href="#bw" class="nav-link" data-index="01">B&W</a>
-      <a href="#red" class="nav-link" data-index="02">Red</a>
-      <a href="#green" class="nav-link" data-index="03">Green</a>
-      <a href="#others" class="nav-link" data-index="04">Others</a>
-      <a href="#about" class="nav-link" data-index="05">About</a>
-    </nav>
-    <a href="#contact" class="nav-cta">Contact ↗</a>
-  </header>
+  <!-- ═══════════ FULL-SCREEN MENU ═══════════ -->
+  <main class="menu-viewport" id="menu-viewport">
 
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="hero-inner">
-      <p class="hero-eyebrow">Visual Artist — Portfolio 2025–2026</p>
-      <h1 class="hero-title">
-        <span class="title-line">SELECTED</span>
-        <span class="title-line title-outline">WORKS &</span>
-        <span class="title-line">EXPLORATIONS</span>
+    <!-- Background grid -->
+    <div class="menu-grid-bg"></div>
+    <div class="scan-lines"></div>
+
+    <!-- SVG Leading Lines -->
+    <svg class="menu-lines" id="menu-lines" aria-hidden="true">
+      <defs>
+        <filter id="lineGlow">
+          <feGaussianBlur stdDeviation="1" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Dynamic lines drawn by JS from center reticle to each tracker -->
+    </svg>
+
+    <!-- Center Reticle / Crosshair -->
+    <div class="center-reticle" id="center-reticle">
+      <div class="reticle-ring"></div>
+      <div class="reticle-cross"></div>
+      <span class="reticle-label">TARGET SELECT</span>
+    </div>
+
+    <!-- Top-left metadata -->
+    <div class="menu-meta menu-meta-tl">
+      <span class="mm-line">SYS: ACTIVE</span>
+      <span class="mm-line">FPS: 60.0</span>
+      <span class="mm-line" id="menu-time"></span>
+    </div>
+
+    <!-- Top-right metadata -->
+    <div class="menu-meta menu-meta-tr">
+      <span class="mm-line">LilB4zyl_</span>
+      <span class="mm-line">3D ARTIST / PORTFOLIO</span>
+      <span class="mm-line" id="menu-coords">x:0000 y:0000</span>
+    </div>
+
+    <!-- Bottom-center title -->
+    <div class="menu-title-block">
+      <h1 class="menu-title">
+        <span class="mt-row">SELECTED</span>
+        <span class="mt-row"><em>Works</em></span>
       </h1>
-      <div class="hero-footer">
-        <p class="hero-desc">Artworks spanning monochrome studies, chromatic experiments, and conceptual explorations.</p>
-        <a href="#bw" class="scroll-indicator">
-          <span class="scroll-text">Scroll</span>
-          <span class="scroll-line"></span>
-        </a>
-      </div>
-    </div>
-    <!-- Decorative grid lines -->
-    <div class="hero-grid-overlay"></div>
-  </section>
-
-  <!-- ============================================================
-       SECTION: BLACK & WHITE ARTWORKS
-       ============================================================ -->
-  <section class="gallery-section" id="bw">
-    <div class="section-label">
-      <span class="label-index">01</span>
-      <span class="label-line"></span>
-      <span class="label-text">Black & White</span>
+      <p class="menu-subtitle">Choose a collection to explore</p>
     </div>
 
-    <div class="section-intro">
-      <h2 class="section-title">MONO<br><em>CHROME</em></h2>
-      <p class="section-desc">Studies in contrast, form, and negative space. Stripped of color to reveal structure and emotion.</p>
-    </div>
-
-    <!-- Horizontal Scrolling Gallery -->
-    <div class="carousel-wrapper">
-      <div class="carousel" data-carousel="bw">
-        <article class="project-card">
-          <div class="card-image bw-img-1">
-            <span class="card-number">001</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Silent Architecture</h3>
-            <p class="card-desc">Charcoal study exploring urban decay through high-contrast shadow play and geometric reduction.</p>
-            <span class="card-tag">Charcoal / 2026</span>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="card-image bw-img-2">
-            <span class="card-number">002</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Dissolving Forms</h3>
-            <p class="card-desc">Ink wash experiments on textured paper. Bodies deconstructing into abstract linework.</p>
-            <span class="card-tag">Ink Wash / 2025</span>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="card-image bw-img-3">
-            <span class="card-number">003</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Fractured Light</h3>
-            <p class="card-desc">Digital exploration of light fragmentation through monochrome noise and grain textures.</p>
-            <span class="card-tag">Digital / 2025</span>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="card-image bw-img-4">
-            <span class="card-number">004</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Void Portrait</h3>
-            <p class="card-desc">A series of portraits where subjects emerge from and retreat into absolute darkness.</p>
-            <span class="card-tag">Mixed Media / 2025</span>
-          </div>
-        </article>
-      </div>
-
-      <div class="carousel-controls">
-        <button class="carousel-btn carousel-prev" data-target="bw" aria-label="Previous">←</button>
-        <div class="carousel-progress">
-          <div class="carousel-progress-fill" data-progress="bw"></div>
-        </div>
-        <button class="carousel-btn carousel-next" data-target="bw" aria-label="Next">→</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION: RED ARTWORKS
-       ============================================================ -->
-  <section class="gallery-section section-red" id="red">
-    <div class="section-label">
-      <span class="label-index">02</span>
-      <span class="label-line"></span>
-      <span class="label-text">Red Collection</span>
-    </div>
-
-    <div class="section-intro">
-      <h2 class="section-title">CRIM<br><em>SON</em></h2>
-      <p class="section-desc">Works driven by urgency, passion, and raw energy. Red as language — from whisper to scream.</p>
-    </div>
-
-    <div class="carousel-wrapper">
-      <div class="carousel" data-carousel="red">
-        <article class="project-card">
-          <div class="card-image red-img-1">
-            <span class="card-number">005</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Pulse</h3>
-            <p class="card-desc">Visceral mixed-media piece exploring circulatory systems as abstract pattern language.</p>
-            <span class="card-tag">Mixed Media / 2026</span>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="card-image red-img-2">
-            <span class="card-number">006</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Burning Archive</h3>
-            <p class="card-desc">Found imagery overlaid with vermillion washes. Memory as combustion.</p>
-            <span class="card-tag">Collage / 2025</span>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="card-image red-img-3">
-            <span class="card-number">007</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Signal / Noise</h3>
-            <p class="card-desc">Digital glitch art rendered in monochrome red. Exploring data corruption as aesthetic.</p>
-            <span class="card-tag">Digital / 2026</span>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="card-image red-img-4">
-            <span class="card-number">008</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Anatomy of Rage</h3>
-            <p class="card-desc">Aggressive brushwork on large-format canvas. Pure emotional discharge in red oxide.</p>
-            <span class="card-tag">Oil / 2025</span>
-          </div>
-        </article>
-      </div>
-
-      <div class="carousel-controls">
-        <button class="carousel-btn carousel-prev" data-target="red" aria-label="Previous">←</button>
-        <div class="carousel-progress">
-          <div class="carousel-progress-fill" data-progress="red"></div>
-        </div>
-        <button class="carousel-btn carousel-next" data-target="red" aria-label="Next">→</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION: GREEN ARTWORKS
-       ============================================================ -->
-  <section class="gallery-section section-green" id="green">
-    <div class="section-label">
-      <span class="label-index">03</span>
-      <span class="label-line"></span>
-      <span class="label-text">Green Collection</span>
-    </div>
-
-    <div class="section-intro">
-      <h2 class="section-title">VER<br><em>DANT</em></h2>
-      <p class="section-desc">Organic forms, growth, and entropy. Nature as an abstract system — cyclical and relentless.</p>
-    </div>
-
-    <div class="carousel-wrapper">
-      <div class="carousel" data-carousel="green">
-        <article class="project-card">
-          <div class="card-image green-img-1">
-            <span class="card-number">009</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Overgrowth</h3>
-            <p class="card-desc">Botanical illustrations pushed past realism into hallucinatory overgrowth patterns.</p>
-            <span class="card-tag">Illustration / 2026</span>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="card-image green-img-2">
-            <span class="card-number">010</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Moss Circuit</h3>
-            <p class="card-desc">Merging organic growth patterns with circuit-board geometry. Nature meets machine.</p>
-            <span class="card-tag">Digital / 2025</span>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="card-image green-img-3">
-            <span class="card-number">011</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Canopy Fragments</h3>
-            <p class="card-desc">Layered transparencies capturing light filtered through dense forest canopy.</p>
-            <span class="card-tag">Photography / 2025</span>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="card-image green-img-4">
-            <span class="card-number">012</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Decomposition Study</h3>
-            <p class="card-desc">Time-lapse watercolor series documenting organic decay as beautiful transformation.</p>
-            <span class="card-tag">Watercolor / 2025</span>
-          </div>
-        </article>
-      </div>
-
-      <div class="carousel-controls">
-        <button class="carousel-btn carousel-prev" data-target="green" aria-label="Previous">←</button>
-        <div class="carousel-progress">
-          <div class="carousel-progress-fill" data-progress="green"></div>
-        </div>
-        <button class="carousel-btn carousel-next" data-target="green" aria-label="Next">→</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       SECTION: OTHERS
-       ============================================================ -->
-  <section class="gallery-section section-others" id="others">
-    <div class="section-label">
-      <span class="label-index">04</span>
-      <span class="label-line"></span>
-      <span class="label-text">Other Works</span>
-    </div>
-
-    <div class="section-intro">
-      <h2 class="section-title">EXPERI<br><em>MENTAL</em></h2>
-      <p class="section-desc">Works that defy categorization. Cross-medium experiments, collaborations, and unfinished thoughts.</p>
-    </div>
-
-    <div class="carousel-wrapper">
-      <div class="carousel" data-carousel="others">
-        <article class="project-card">
-          <div class="card-image other-img-1">
-            <span class="card-number">013</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Untitled (Transmission)</h3>
-            <p class="card-desc">Multi-channel video installation exploring radio frequency as visual medium.</p>
-            <span class="card-tag">Video / 2026</span>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="card-image other-img-2">
-            <span class="card-number">014</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Ghost Typography</h3>
-            <p class="card-desc">Experimental type design derived from erosion patterns on concrete surfaces.</p>
-            <span class="card-tag">Type Design / 2025</span>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="card-image other-img-3">
-            <span class="card-number">015</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Synthetic Landscape</h3>
-            <p class="card-desc">AI-assisted terrain generation sculpted and repainted by hand. Human–machine collaboration.</p>
-            <span class="card-tag">Mixed / 2026</span>
-          </div>
-        </article>
-
-        <article class="project-card">
-          <div class="card-image other-img-4">
-            <span class="card-number">016</span>
-          </div>
-          <div class="card-info">
-            <h3 class="card-title">Sound Drawings</h3>
-            <p class="card-desc">Marks generated in direct response to ambient field recordings. Drawing as listening.</p>
-            <span class="card-tag">Pen / 2025</span>
-          </div>
-        </article>
-      </div>
-
-      <div class="carousel-controls">
-        <button class="carousel-btn carousel-prev" data-target="others" aria-label="Previous">←</button>
-        <div class="carousel-progress">
-          <div class="carousel-progress-fill" data-progress="others"></div>
-        </div>
-        <button class="carousel-btn carousel-next" data-target="others" aria-label="Next">→</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================================
-       ABOUT SECTION
-       ============================================================ -->
-  <section class="about" id="about">
-    <div class="about-inner">
-      <div class="about-portrait">
-        <div class="portrait-frame">
-          <span>Your Photo</span>
+    <!-- ── TRACKER: RED ── -->
+    <a href="red.html" class="tracker tracker-red" id="tracker-red">
+      <div class="tracker-box">
+        <span class="corner c-tl"></span>
+        <span class="corner c-tr"></span>
+        <span class="corner c-bl"></span>
+        <span class="corner c-br"></span>
+        <span class="crosshair-mark"></span>
+        <div class="tracker-content">
+          <span class="tracker-cat">RED</span>
+          <span class="tracker-sub">chromatic.01 — 3 works</span>
+          <span class="tracker-coords">x:847 y:213</span>
         </div>
       </div>
-      <div class="about-content">
-        <h2 class="section-title">ABOUT<br><em>THE ARTIST</em></h2>
-        <p class="about-bio">
-          A visual artist exploring the boundaries between analog and digital, chaos and order.
-          This portfolio is an evolving archive — add your own bio, medium preferences, and artistic philosophy here.
-        </p>
-        <div class="about-stats">
-          <div class="stat">
-            <span class="stat-number">16+</span>
-            <span class="stat-label">Projects</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">4</span>
-            <span class="stat-label">Collections</span>
-          </div>
-          <div class="stat">
-            <span class="stat-number">2025</span>
-            <span class="stat-label">Since</span>
-          </div>
-        </div>
-        <div class="about-links">
-          <a href="#" class="btn-link">Download CV ↗</a>
-          <a href="#" class="btn-link">View Process ↗</a>
-        </div>
-      </div>
-    </div>
-  </section>
+      <span class="tracker-pulse"></span>
+    </a>
 
-  <!-- ============================================================
-       CONTACT / FOOTER
-       ============================================================ -->
-  <footer class="contact" id="contact">
-    <div class="contact-inner">
-      <p class="contact-eyebrow">05 — Get in Touch</p>
-      <h2 class="contact-title">LET'S<br><em>CONNECT</em></h2>
-      <p class="contact-desc">Open for commissions, collaborations, exhibitions, and conversations.</p>
-      <a href="mailto:your-email@example.com" class="contact-email">your-email@example.com</a>
-      <div class="contact-socials">
-        <a href="#" class="social" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a href="#" class="social" target="_blank" rel="noopener noreferrer">ArtStation</a>
-        <a href="#" class="social" target="_blank" rel="noopener noreferrer">Behance</a>
-        <a href="#" class="social" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <!-- ── TRACKER: BLACK & WHITE ── -->
+    <a href="bw.html" class="tracker tracker-bw" id="tracker-bw">
+      <div class="tracker-box">
+        <span class="corner c-tl"></span>
+        <span class="corner c-tr"></span>
+        <span class="corner c-bl"></span>
+        <span class="corner c-br"></span>
+        <span class="crosshair-mark"></span>
+        <div class="tracker-content">
+          <span class="tracker-cat">BLACK &amp; WHITE</span>
+          <span class="tracker-sub">monochrome.02 — 3 works</span>
+          <span class="tracker-coords">x:124 y:567</span>
+        </div>
       </div>
-    </div>
-    <div class="footer-bottom">
+      <span class="tracker-pulse"></span>
+    </a>
+
+    <!-- ── TRACKER: GREEN ── -->
+    <a href="green.html" class="tracker tracker-green" id="tracker-green">
+      <div class="tracker-box">
+        <span class="corner c-tl"></span>
+        <span class="corner c-tr"></span>
+        <span class="corner c-bl"></span>
+        <span class="corner c-br"></span>
+        <span class="crosshair-mark"></span>
+        <div class="tracker-content">
+          <span class="tracker-cat">GREEN</span>
+          <span class="tracker-sub">organic.03 — 3 works</span>
+          <span class="tracker-coords">x:312 y:891</span>
+        </div>
+      </div>
+      <span class="tracker-pulse"></span>
+    </a>
+
+    <!-- ── TRACKER: OTHER ── -->
+    <a href="other.html" class="tracker tracker-other" id="tracker-other">
+      <div class="tracker-box">
+        <span class="corner c-tl"></span>
+        <span class="corner c-tr"></span>
+        <span class="corner c-bl"></span>
+        <span class="corner c-br"></span>
+        <span class="crosshair-mark"></span>
+        <div class="tracker-content">
+          <span class="tracker-cat">OTHER</span>
+          <span class="tracker-sub">experimental.04 — 3 works</span>
+          <span class="tracker-coords">x:695 y:442</span>
+        </div>
+      </div>
+      <span class="tracker-pulse"></span>
+    </a>
+
+    <!-- Bottom bar -->
+    <div class="menu-footer">
       <span>&copy; 2026 LilB4zyl</span>
+      <a href="#" class="menu-footer-link">About</a>
+      <a href="mailto:your-email@example.com" class="menu-footer-link">Contact</a>
       <span>All rights reserved</span>
     </div>
-  </footer>
+  </main>
 
   <script src="script.js"></script>
 </body>
